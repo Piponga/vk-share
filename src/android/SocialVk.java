@@ -116,12 +116,7 @@ public class SocialVk extends CordovaPlugin {
             success();
             return true;
         } else if(ACTION_GET_LOGGED.equals(action)) {
-            if(VKSdk.isLoggedIn()) {
-                success();
-            } else {
-                fail();   
-            }
-            return true;
+            return getLogged();
         } else if (ACTION_SHARE.equals(action)) {
             return shareOrLogin(args.getString(0), args.getString(1), args.getString(2));
         } else if (ACTION_USERS_GET.equals(action)) {
@@ -262,6 +257,23 @@ public class SocialVk extends CordovaPlugin {
         VKSdk.login(getActivity(), permissions);
         return true;
     }
+    
+    private boolean getLogged()
+    {
+        this.cordova.setActivityResultCallback(this);
+        if(!VKSdk.isLoggedIn()) {
+            if(_callbackContext != null) {
+                _callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, err));
+                _callbackContext.error(error.errorMessage);
+            }
+        } else {
+            if(_callbackContext != null) {
+                _callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
+                _callbackContext.success();
+            }
+        }
+        return true;
+    }    
 
     private boolean shareOrLogin(final String url, final String comment, final String imageUrl)
     {
