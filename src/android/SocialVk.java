@@ -288,6 +288,10 @@ public class SocialVk extends CordovaPlugin {
                     .setShareDialogListener(new VKShareDialog.VKShareDialogListener() {
                             public void onVkShareComplete(int postId) {
                                 Log.i(TAG, "VK sharing complete");
+                                if(_callbackContext != null) {
+                                    _callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
+                                    _callbackContext.success();
+                                }
                             }
                             public void onVkShareCancel() {
                                 Log.i(TAG, "VK sharing cancelled");
