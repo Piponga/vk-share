@@ -9,6 +9,10 @@ SocialVk.prototype.login = function(permissions, successCallback, errorCallback)
     cordova.exec(successCallback, errorCallback, "SocialVk", "login", [permissions]);
 };
 
+SocialVk.prototype.getOnline = function(successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, "SocialVk", "getOnline");
+};
+
 SocialVk.prototype.share = function(sourceURL, description, imageURL, successCallback, errorCallback) {
     cordova.exec(successCallback, errorCallback, "SocialVk", "share", [sourceURL, description, imageURL]);
 };
