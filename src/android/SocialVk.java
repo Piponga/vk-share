@@ -263,9 +263,10 @@ public class SocialVk extends CordovaPlugin {
         this.cordova.setActivityResultCallback(this);
         if(!VKSdk.isLoggedIn()) {
             if(_callbackContext != null) {
-                _callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR));
-                final String[] scope = new String[]{VKScope.WALL, VKScope.PHOTOS};
-                _callbackContext.error(VKScope.WALL);
+                //_callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR));
+                _callbackContext.sendPluginResult("aaaaa");
+                //final String[] scope = new String[]{VKScope.WALL, VKScope.PHOTOS};
+                _callbackContext.error("Error");
             }
         } else {
             if(_callbackContext != null) {
